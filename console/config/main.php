@@ -31,5 +31,15 @@ return [
             ],
         ],
     ],
+    'container' => [
+        'definitions' => [
+            'console\components\import\ProviderInterface' => [
+                ['class' => 'console\components\import\currency\CbrProvider'],
+//                ['http://www.cbr.ru/scripts/XML_daily.asp'],
+                ['https://www.cbr-xml-daily.ru/daily.xml'],
+            ],
+            'console\components\import\currency\Importer',
+        ],
+    ],
     'params' => $params,
 ];
