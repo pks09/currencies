@@ -16,6 +16,7 @@ class CbrProvider extends AbstractRequestProvider
      */
     protected function parseData($rawData): array
     {
+        /** @var \SimpleXMLElement $xml */
         $xml = simplexml_load_string($rawData);
         if (!$xml) {
             throw new InvalidParamException('Invalid xml passed as a rawData parameter');
@@ -26,7 +27,7 @@ class CbrProvider extends AbstractRequestProvider
                 throw new UnexpectedXmlException('Unexpected xml structure '.VarDumper::dumpAsString($item));
             }
             $nominal = (int)$item->Nominal;
-            if (0 == $nominal) {
+            if (!($nominal > 0)) {
                 Yii::warning('Incorrect Nominal value: '.VarDumper::dumpAsString($item), 'currency-import');
                 continue;
             }

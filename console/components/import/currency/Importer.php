@@ -20,8 +20,11 @@ class Importer {
      */
     public function run()
     {
+        /** @var mixed $data */
         $data = $this->api->getData();
+        /** @var string[] $codes */
         $codes = array_column($data, 'charCode');
+        /** @var Currency[] $models */
         $models = Currency::find()->where(['charCode' => $codes])->indexBy('charCode')->all();
         foreach ($data as $row) {
             $model = $models[$row['charCode']] ?? new Currency();
